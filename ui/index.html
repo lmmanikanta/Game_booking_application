@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Booking System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <nav id="navbar">
+            <h1>Game Booking System</h1>
+            <div id="nav-buttons">
+                <button onclick="showLoginForm()">Login</button>
+                <button onclick="showRegisterForm()">Register</button>
+                <button id="logoutBtn" style="display: none;" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Auth Forms -->
+        <div id="loginForm" class="auth-form">
+            <h2>Login</h2>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="loginUsername" placeholder="Email or SAP ID" required>
+                <input type="password" id="loginPassword" placeholder="Password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <div id="registerForm" class="auth-form" style="display: none;">
+            <h2>Register</h2>
+            <form onsubmit="handleRegister(event)">
+                <input type="email" id="regEmail" placeholder="Email" required>
+                <input type="text" id="regSapId" placeholder="SAP ID" required>
+                <input type="password" id="regPassword" placeholder="Password" required>
+                <button type="submit">Register</button>
+            </form>
+        </div>
+
+        <!-- Main Content -->
+        <div id="mainContent" style="display: none;">
+            <div class="booking-section">
+                <h2>Book a Game</h2>
+                <div class="booking-form">
+                    <div class="form-group">
+                        <label for="gameSelect">Select Game:</label>
+                        <select id="gameSelect">
+                            <option value="">Select Game</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="dateSelect">Select Date:</label>
+                        <input type="date" id="dateSelect" min="">
+                    </div>
+                    <div class="form-actions">
+                        <button id="viewSlotsBtn" onclick="loadSlots()">View Available Slots</button>
+                    </div>
+                </div>
+                <div id="availableSlots" class="slots-container"></div>
+            </div>
+
+            <div class="booking-history">
+                <h2>My Bookings</h2>
+                <div id="bookingsList"></div>
+            </div>
+        </div>
+
+        <!-- Admin Panel -->
+        <div id="adminPanel" style="display: none;">
+            <h2>Admin Panel</h2>
+            <div class="admin-controls">
+                <div class="game-management">
+                    <h3>Game Management</h3>
+                    <button onclick="showGameForm()">Add New Game</button>
+                    <!-- Game creation form (hidden by default) -->
+                    <div id="gameForm" style="display:none; margin-top:12px;">
+                        <input type="text" id="newGameName" placeholder="Game name">
+                        <select id="newGameType">
+                            <option value="chess">Chess</option>
+                            <option value="carrom">Carrom</option>
+                            <option value="table_tennis">Table Tennis</option>
+                            <option value="badminton">Badminton</option>
+                            <option value="fuss_ball">Fuss Ball</option>
+                        </select>
+                        <input type="number" id="newGameMaxPlayers" placeholder="Max players" min="1" value="2">
+                        <button onclick="handleCreateGame()">Create Game</button>
+                    </div>
+                    <div id="gamesList"></div>
+                </div>
+                <div class="slot-management">
+                    <h3>Slot Management</h3>
+                    <select id="adminGameSelect">
+                        <option value="">Select Game</option>
+                    </select>
+                    <input type="date" id="adminDateSelect">
+                    <button onclick="generateSlots()">Generate Slots</button>
+                    <button onclick="cancelSlots()">Cancel Slots</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Modal -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content">
+                <h3>Complete Booking</h3>
+                <p id="bookingDetails"></p>
+                <div id="otherPlayers">
+                    <h4>Add Other Players (Optional)</h4>
+                    <input type="text" id="otherPlayersSapIds" placeholder="Enter SAP IDs (comma-separated)">
+                </div>
+                <div class="modal-buttons">
+                    <button onclick="confirmBooking()">Confirm</button>
+                    <button onclick="closeBookingModal()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

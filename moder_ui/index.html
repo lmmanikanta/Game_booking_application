@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GameZone Booking</title>
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- New Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Message container will be added here by app.js -->
+
+    <div class="container">
+        <nav id="navbar">
+            <h1 class="logo">GameZone</h1>
+            <div id="nav-buttons">
+                <button id="loginBtn" class="btn btn-secondary" style="display: inline-block;" onclick="showLoginForm()">Login</button>
+                <button id="signupBtn" class="btn btn-secondary" onclick="showRegisterForm()">Register</button>
+                <button id="logoutBtn" class="btn btn-primary" style="display: none;" onclick="logout()">Logout</button>
+            </div>
+        </nav>
+
+        <!-- Auth Forms -->
+        <div id="loginForm" class="auth-form card">
+            <h2>Welcome Back!</h2>
+            <form onsubmit="handleLogin(event)">
+                <input type="text" id="loginUsername" class="form-control" placeholder="Email or SAP ID" required>
+                <input type="password" id="loginPassword" class="form-control" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary btn-block">Login</button>
+            </form>
+        </div>
+
+        <div id="registerForm" class="auth-form card" style="display: none;">
+            <h2>Create Account</h2>
+            <form onsubmit="handleRegister(event)">
+                <input type="email" id="regEmail" class="form-control" placeholder="Email" required>
+                <input type="text" id="regSapId" class="form-control" placeholder="SAP ID" required>
+                <input type="password" id="regPassword" class="form-control" placeholder="Password" required>
+                <button type="submit" class="btn btn-primary btn-block">Register</button>
+            </form>
+        </div>
+
+        <!-- Main Content -->
+        <main id="mainContent" style="display: none;">
+            <div class="main-grid">
+                <div class="booking-section card">
+                    <h2>Book a Game</h2>
+                    <div class="booking-form">
+                        <div class="form-group">
+                            <label for="gameSelect">Select Game:</label>
+                            <select id="gameSelect" class="form-control">
+                                <option value="">Select Game</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="dateSelect">Select Date:</label>
+                            <input type="date" id="dateSelect" class="form-control" min="">
+                        </div>
+                        <div class="form-actions">
+                            <button id="viewSlotsBtn" class="btn btn-primary" onclick="loadSlots()">View Available Slots</button>
+                        </div>
+                    </div>
+                    <div id="availableSlots" class="slots-container"></div>
+                </div>
+
+                <div class="booking-history card">
+                    <h2>My Bookings</h2>
+                    <div id="bookingsList"></div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Admin Panel -->
+        <div id="adminPanel" class="card" style="display: none; margin-top: 40px;">
+            <h2>Admin Panel</h2>
+            <div class="admin-controls">
+                <div class="game-management">
+                    <h3>Game Management</h3>
+                    <button class="btn btn-secondary" onclick="showGameForm()">Add New Game</button>
+                    <div id="gameForm" style="display:none; margin-top:1.5rem;">
+                        <input type="text" id="newGameName" class="form-control" placeholder="Game name">
+                        <select id="newGameType" class="form-control">
+                            <option value="chess">Chess</option>
+                            <option value="carrom">Carrom</option>
+                            <option value="table_tennis">Table Tennis</option>
+                            <option value="badminton">Badminton</option>
+                            <option value="fuss_ball">Fuss Ball</option>
+                        </select>
+                        <input type="number" id="newGameMaxPlayers" class="form-control" placeholder="Max players" min="1" value="2">
+                        <button class="btn btn-primary" onclick="handleCreateGame()">Create Game</button>
+                    </div>
+                    <div id="gamesList" class="admin-list"></div>
+                </div>
+                <div class="slot-management">
+                    <h3>Slot Management</h3>
+                    <select id="adminGameSelect" class="form-control">
+                        <option value="">Select Game</option>
+                    </select>
+                    <input type="date" id="adminDateSelect" class="form-control">
+                    <div class="admin-actions">
+                        <button class="btn btn-success" onclick="generateSlots()">Generate Slots</button>
+                        <button class="btn btn-danger" onclick="cancelSlots()">Cancel Slots</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Booking Modal -->
+        <div id="bookingModal" class="modal">
+            <div class="modal-content card">
+                <h3>Complete Booking</h3>
+                <p id="bookingDetails"></p>
+                <div id="otherPlayers">
+                    <h4>Add Other Players (Optional)</h4>
+                    <input type="text" id="otherPlayersSapIds" class="form-control" placeholder="Enter SAP IDs (comma-separated)">
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn btn-secondary" onclick="closeBookingModal()">Cancel</button>
+                    <button class="btn btn-primary" onclick="confirmBooking()">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

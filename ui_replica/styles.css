@@ -1,0 +1,1054 @@
+/* Modern UI Styles 2025 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    /* Modern Color Palette */
+    --primary-color: #6366f1;
+    --primary-light: #818cf8;
+    --primary-dark: #4f46e5;
+    --secondary-color: #10b981;
+    --secondary-light: #34d399;
+    --accent-color: #f59e0b;
+    --danger-color: #ef4444;
+    --dark-color: #1f2937;
+    --light-color: #f3f4f6;
+    --success-color: #22c55e;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
+    
+    /* Modern Gradients */
+    --gradient-primary: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+    --gradient-secondary: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    --gradient-light: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    
+    /* Glassmorphism */
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+    
+    /* Neumorphic Shadows */
+    --shadow-soft: 6px 6px 12px #e2e8f0,
+                  -6px -6px 12px #ffffff;
+    --shadow-strong: 10px 10px 20px #d1d5db,
+                    -10px -10px 20px #ffffff;
+    --shadow-inner: inset 2px 2px 5px #d1d5db,
+                   inset -2px -2px 5px #ffffff;
+    
+    /* Animations */
+    --transition-quick: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
+    /* Border Radius */
+    --radius-sm: 0.5rem;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-full: 9999px;
+}
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background: var(--gradient-light);
+    color: var(--dark-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, var(--primary-light) 0%, transparent 70%),
+                radial-gradient(circle at bottom left, var(--secondary-light) 0%, transparent 70%);
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--glass-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Message System */
+#messageContainer {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.message {
+    padding: 1rem 1.5rem;
+    margin: 0.75rem;
+    border-radius: var(--radius-lg);
+    color: white;
+    box-shadow: var(--glass-shadow);
+    animation: 
+        slideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1),
+        float 3s ease-in-out infinite,
+        fadeOut 0.3s ease-in forwards 4s;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    min-width: 300px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+/* Glass Cards Animation */
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+    100% {
+        background-position: 200% center;
+    }
+}
+
+.glass-effect {
+    background: linear-gradient(
+        90deg,
+        transparent 25%,
+        rgba(255, 255, 255, 0.1) 50%,
+        transparent 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite;
+}
+
+.message::before {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.message.error {
+    background: linear-gradient(135deg, #ff4444 0%, #cc0000 100%);
+}
+
+.message.error::before {
+    content: '❌';
+}
+
+.message.success {
+    background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+}
+
+.message.success::before {
+    content: '✅';
+}
+
+.message.info {
+    background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%);
+}
+
+.message.info::before {
+    content: 'ℹ️';
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+/* Modern Animations */
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(99, 102, 241, 0.4);
+    }
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    /* On small screens, stack slots vertically for easier tap targets */
+    .slots-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        overflow-x: visible;
+    }
+
+    .modal-content {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    #nav-buttons {
+        gap: 0.5rem;
+    }
+
+    #nav-buttons button {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+}
+
+/* Modern Hover Effects */
+.hover-glow:hover {
+    animation: pulseGlow 2s infinite;
+}
+
+.gradient-text {
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: gradientFlow 3s ease infinite;
+}
+
+
+/* Slots Grid - horizontal, scrollable list for modern UI */
+.slots-grid {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 1rem;
+    margin: 1.25rem 0;
+    padding-bottom: 0.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+}
+
+/* Visual container for available slots (keeps horizontal layout tidy) */
+#availableSlots {
+    display: block;
+    padding: 0.25rem 0.5rem;
+}
+
+.slots-grid::-webkit-scrollbar {
+    height: 10px;
+}
+.slots-grid::-webkit-scrollbar-track {
+    background: transparent;
+}
+.slots-grid::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, rgba(99,102,241,0.3), rgba(16,185,129,0.3));
+    border-radius: 999px;
+}
+
+.slot-card {
+    flex: 0 0 280px; /* card width */
+    min-width: 240px;
+    max-width: 320px;
+    background: var(--glass-bg);
+    border-radius: 1rem;
+    padding: 1.25rem;
+    box-shadow: var(--glass-shadow);
+    border: 1px solid var(--glass-border);
+    transition: transform 300ms cubic-bezier(0.4,0,0.2,1), box-shadow 300ms;
+    position: relative;
+    overflow: hidden;
+    scroll-snap-align: start;
+}
+
+.slot-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--primary-light), var(--secondary-light));
+    opacity: 0.9;
+}
+
+.slot-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(79,70,229,0.12);
+}
+
+.slot-card.cancelled {
+    background: linear-gradient(135deg, rgba(239,68,68,0.06), rgba(255,255,255,0.02));
+    border-left: 4px solid var(--danger-color);
+}
+
+.slot-card.unavailable {
+    background: linear-gradient(135deg, rgba(31,41,55,0.03), rgba(255,255,255,0.02));
+    opacity: 0.9;
+}
+
+.slot-time {
+    font-size: 1.1em;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #2c3e50;
+}
+
+.slot-status {
+    margin: 8px 0;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.slot-status.available {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.slot-card.cancelled .slot-status {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.slot-card.unavailable .slot-status {
+    background-color: #eeeeee;
+    color: #616161;
+}
+
+/* Status Messages */
+.message-info, .message-error {
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.message-info {
+    background-color: #e3f2fd;
+    color: #1565c0;
+    border: 1px solid #bbdefb;
+}
+
+.message-error {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #ffcdd2;
+}
+
+/* Admin Actions */
+.admin-action {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.admin-action:hover {
+    background-color: #388E3C;
+}
+
+/* Loading State */
+.loading {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+}
+
+/* Empty States */
+.empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin: 20px 0;
+}
+
+.empty-state p {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* Booking History */
+.booking-history {
+    margin-top: 30px;
+}
+
+.booking-card {
+    background-color: white;
+    border-radius: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-left: 4px solid #2196F3;
+}
+
+.booking-card h3 {
+    color: #2c3e50;
+    margin-bottom: 10px;
+}
+
+.booking-card p {
+    color: #666;
+    margin: 5px 0;
+}
+
+.booking-card .cancel-button {
+    margin-top: 10px;
+    padding: 8px 16px;
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.booking-card .cancel-button:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+
+.booking-card .cancel-button:active {
+    transform: translateY(1px);
+}
+
+/* Navigation */
+#navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 2rem;
+    background: var(--glass-bg);
+    color: var(--dark-color);
+    margin-bottom: 2rem;
+    box-shadow: var(--glass-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+#nav-buttons {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#nav-buttons button {
+    position: relative;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--radius-full);
+    background: var(--gradient-primary);
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-bounce);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.875rem;
+    overflow: hidden;
+}
+
+#nav-buttons button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        45deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.2) 50%,
+        transparent 100%
+    );
+    transform: translateX(-100%);
+    transition: var(--transition-quick);
+}
+
+#nav-buttons button:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+#nav-buttons button:active {
+    transform: translateY(0);
+}
+
+/* Auth Forms */
+.auth-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: var(--shadow-strong);
+    transition: var(--transition-quick);
+}
+
+.auth-form:hover {
+    transform: translateY(-5px);
+}
+
+.auth-form h2 {
+    margin-bottom: 25px;
+    color: var(--dark-color);
+    text-align: center;
+    font-size: 2em;
+    font-weight: 600;
+}
+
+.auth-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.auth-form input {
+    padding: 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: var(--transition-quick);
+    background-color: #f8f9fa;
+}
+
+.auth-form input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+    outline: none;
+}
+
+.auth-form button {
+    padding: 15px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: var(--transition-quick);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.auth-form button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+.auth-form button:active {
+    transform: translateY(0);
+}
+
+/* Booking Section */
+.booking-section {
+    margin-bottom: 40px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    background: var(--glass-bg);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(10px);
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    position: relative;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: var(--dark-color);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-left: 0.5rem;
+    background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.booking-form select,
+.booking-form input {
+    padding: 1rem 1.25rem;
+    border: 2px solid rgba(99, 102, 241, 0.1);
+    border-radius: var(--radius-full);
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.8);
+    transition: var(--transition-bounce);
+    width: 100%;
+    color: var(--dark-color);
+    box-shadow: var(--shadow-inner);
+    backdrop-filter: blur(4px);
+}
+
+.booking-form select:hover,
+.booking-form input:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+    background: white;
+}
+
+.booking-form select:focus,
+.booking-form input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    transform: translateY(-2px);
+    background: white;
+}
+
+.booking-form select {
+    cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--dark-color) 50%),
+                      linear-gradient(135deg, var(--dark-color) 50%, transparent 50%);
+    background-position: calc(100% - 20px) calc(1em + 2px),
+                         calc(100% - 15px) calc(1em + 2px);
+    background-size: 5px 5px,
+                    5px 5px;
+    background-repeat: no-repeat;
+    appearance: none;
+}
+
+.booking-form select:hover,
+.booking-form input:hover {
+    border-color: var(--primary-color);
+    background-color: white;
+}
+
+.booking-form select:focus,
+.booking-form input:focus {
+    border-color: var(--primary-color);
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+    background-color: white;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+#viewSlotsBtn {
+    padding: 12px 24px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#viewSlotsBtn:hover {
+    background-color: #2980b9;
+    transform: translateY(-1px);
+}
+
+#viewSlotsBtn:active {
+    transform: translateY(1px);
+}
+
+.slots-container {
+    margin-top: 30px;
+}
+
+#availableSlots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.slot-card {
+    padding: 1.5rem;
+    background: var(--glass-bg);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: var(--transition-bounce);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.slot-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(125deg, 
+        rgba(255, 255, 255, 0.3) 0%, 
+        rgba(255, 255, 255, 0.2) 40%, 
+        transparent 100%);
+    opacity: 0;
+    transition: var(--transition-quick);
+}
+
+.slot-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-strong);
+}
+
+.slot-card:hover::after {
+    opacity: 1;
+}
+
+.slot-card .book-button {
+    display: block;
+    width: 100%;
+    padding: 1rem 1.5rem;
+    margin-top: 1rem;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: var(--transition-bounce);
+    position: relative;
+    overflow: hidden;
+}
+
+.slot-card .book-button:hover {
+    background-color: #27ae60;
+}
+
+/* Admin Panel */
+.admin-controls {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-strong);
+    margin-top: 30px;
+    border: 1px solid rgba(74, 144, 226, 0.1);
+}
+
+.admin-controls h3 {
+    color: var(--dark-color);
+    margin-bottom: 20px;
+    font-size: 1.5em;
+    font-weight: 600;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+}
+
+.admin-controls button {
+    padding: 12px 24px;
+    background: var(--gradient-secondary);
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 5px;
+    font-weight: 600;
+    transition: var(--transition-quick);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.admin-controls button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-soft);
+}
+
+.admin-controls button:active {
+    transform: translateY(0);
+}
+
+.admin-game-item {
+    background: var(--glass-bg);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--glass-shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: var(--transition-bounce);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-game-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: var(--transition-quick);
+}
+
+.admin-game-item:hover {
+    transform: translateX(10px) scale(1.02);
+    box-shadow: var(--shadow-strong);
+}
+
+.admin-game-item:hover::before {
+    opacity: 1;
+}
+
+/* Modern Status Indicators */
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    backdrop-filter: blur(4px);
+}
+
+.status-badge.active {
+    background: rgba(34, 197, 94, 0.1);
+    color: var(--success-color);
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.status-badge.booked {
+    background: rgba(99, 102, 241, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.status-badge.cancelled {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger-color);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.admin-controls input,
+.admin-controls select {
+    padding: 8px;
+    margin: 5px;
+    border: 1px solid #dcdde1;
+    border-radius: 4px;
+}
+
+.admin-game-item {
+    background-color: #f8f9fa;
+    padding: 12px;
+    margin: 10px 0;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+    animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    position: relative;
+    background-color: white;
+    margin: 10% auto;
+    padding: 30px;
+    border-radius: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow-strong);
+    animation: slideUp 0.3s ease-out;
+}
+
+.modal h3 {
+    color: #2c3e50;
+    margin-bottom: 15px;
+}
+
+.modal input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #dcdde1;
+    border-radius: 4px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-buttons button:first-child {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.modal-buttons button:last-child {
+    background-color: #e74c3c;
+    color: white;
+}
+
+/* Game Form */
+#gameForm {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 15px;
+}
+
+#gameForm input,
+#gameForm select {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #dcdde1;
+    border-radius: 4px;
+}
+
+#gameForm button {
+    width: 100%;
+    padding: 10px;
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+#gameForm button:hover {
+    background-color: #27ae60;
+}
+
+/* Slot Number Display */
+.slot-number {
+    color: #2c3e50;
+    font-weight: bold;
+    margin-bottom: 8px;
+    padding: 4px 8px;
+    background-color: #f1f2f6;
+    border-radius: 4px;
+    display: inline-block;
+}
